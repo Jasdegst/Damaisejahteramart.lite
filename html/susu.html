@@ -2,62 +2,588 @@
 <html lang="id">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Aneka Susu</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/produk.css">
 
-<title>Aneka Susu</title>
-
-<link rel="stylesheet" href="../css/produk.css">
-
-<link
-href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
-rel="stylesheet"/>
-
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet">
 </head>
 
 <body>
 
-<header class="produk-header">
+  <header class="produk-header">
 
-<a href="index.html">
+    <a href="../index.html" class="back-btn">
+      <i class="ri-arrow-left-line"></i>
+    </a>
 
-<i class="ri-arrow-left-line"></i>
+    <h2>Aneka Susu</h2>
 
-</a>
+    <button class="search-btn">
+      <i class="ri-search-line"></i>
+    </button>
 
-<h2>Aneka Susu</h2>
+  </header>
 
-</header>
+  <section class="banner">
 
-<section class="produk-list">
+    <h1>🥛 Aneka Susu Berkualitas</h1>
 
-<div class="item">
+    <p>Pilih susu favorit keluarga Anda</p>
 
-<img src="asset/sgm.jpg">
+  </section>
 
-<h4>SGM Eksplor 1+</h4>
 
-<p>Rp 78.000</p>
+<!-- CARD PRODUK -->
 
-<button>Lihat Detail</button>
+  <section class="produk-grid">
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+     <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/fortigro.jpg" alt="DOWCOW FORTIGROW">
+
+      <h3>DOWCOW FORTIGROW</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp80.000
+        </span>
+
+        <span class="harga-baru">
+          Rp75.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'DOWCOW FORTIGROW',
+75000,
+'../asset/fortigro.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+  <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+<div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+<div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+    <div class="produk-card">
+
+      <span class="promo">PROMO</span>
+
+      <img src="../asset/SGM_1+ Madu .jpg" alt="SGM">
+
+      <h3>SGM Eksplor 1+</h3>
+
+      <p class="stok">Stok : 25</p>
+
+      <div class="harga">
+
+        <span class="harga-lama">
+          Rp85.000
+        </span>
+
+        <span class="harga-baru">
+          Rp78.000
+        </span>
+
+      </div>
+
+      <button
+class="btn-beli"
+
+onclick="addToCart(
+'SGM Eksplor 1+',
+78000,
+'../asset/SGM_1+ Madu.jpg'
+)">
+
+Beli
+
+</button>
+
+    </div>
+
+
+
+
+  </section>
+
+ 
+
+
+  
+
+<!-- Keranjang Button -->
+<button id="cartToggle" class="cart-toggle">
+
+  <i class="ri-shopping-cart-2-line"></i>
+
+  <span id="cartCount">0</span>
+
+</button>
+
+<!-- Keranjang -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<div class="cart-sheet" id="cartSheet">
+
+  <div class="cart-header">
+
+    <h3>Keranjang Belanja</h3>
+
+    <button id="closeCart">
+      <i class="ri-close-line"></i>
+    </button>
+
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="cart-footer">
+
+    <h4>
+      Total :
+      <span id="cartTotal">
+        Rp0
+      </span>
+    </h4>
+
+    <button id="checkoutBtn">
+
+Checkout
+
+</button>
+
+  </div>
 
 </div>
 
-<div class="item">
-
-<img src="asset/dancow.jpg">
-
-<h4>Dancow FortiGro</h4>
-
-<p>Rp 65.000</p>
-
-<button>Lihat Detail</button>
-
-</div>
-
-</section>
-
+<script src="../js/cart.js"></script>
 </body>
 </html>

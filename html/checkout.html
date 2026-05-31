@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Checkout</title>
+
+<link rel="stylesheet"
+href="../css/checkout.css">
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<a href="javascript:history.back()">
+
+<i class="ri-arrow-left-line"></i>
+
+</a>
+
+<h2>Checkout</h2>
+
+</header>
+
+<div class="checkout-container">
+
+<div class="card">
+
+<h3>Ringkasan Pesanan</h3>
+
+<div id="orderList"></div>
+
+</div>
+
+<div class="card">
+
+<h3>Metode Pengambilan</h3>
+
+<label>
+
+<input
+type="radio"
+name="delivery"
+value="pickup"
+checked>
+
+Ambil di Toko (Gratis)
+
+</label>
+
+<label>
+
+<input
+type="radio"
+name="delivery"
+value="delivery">
+
+Diantar ke Rumah
+
+</label>
+
+</div>
+
+<div
+class="card"
+id="distanceCard"
+style="display:none;">
+
+<h3>Jarak Pengiriman</h3>
+
+<input
+type="text"
+id="distance"
+readonly>
+
+</div>
+
+<div class="card">
+
+<h3>Ringkasan Pembayaran</h3>
+
+<p>
+Subtotal :
+<span id="subtotal">
+Rp0
+</span>
+</p>
+
+<p>
+Ongkir :
+<span id="shipping">
+Rp0
+</span>
+</p>
+
+<h2>
+Total :
+<span id="total">
+Rp0
+</span>
+</h2>
+
+</div>
+
+<div class="card">
+
+  <h3>Data Pemesan</h3>
+
+  <input
+    type="text"
+    id="nama"
+    placeholder="Nama Lengkap">
+
+  <input
+    type="text"
+    id="telepon"
+    placeholder="Nomor WhatsApp">
+
+  <textarea
+    id="alamat"
+    placeholder="Alamat Lengkap"></textarea>
+
+  <button
+    id="lokasiBtn"
+    type="button">
+
+    Ambil Lokasi Saya
+
+  </button>
+
+  <p id="lokasiStatus">
+    Lokasi belum diambil
+  </p>
+
+</div>
+
+<button
+class="btn-checkout"
+onclick="sendWhatsapp()">
+
+Kirim Pesanan
+
+</button>
+
+</div>
+
+<script src="../js/checkout.js"></script>
+
+</body>
+
+</html>
