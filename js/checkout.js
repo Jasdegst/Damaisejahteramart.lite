@@ -1,7 +1,9 @@
 let latitude = "";
 let longitude = "";
+
 const tokoLat = 5.12543;
 const tokoLng = 97.4438152;
+
 let subtotal = 0;
 let ongkir = 0;
 
@@ -17,6 +19,14 @@ document.getElementById("shipping");
 const totalEl =
 document.getElementById("total");
 
+/* Keranjang */
+
+const cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+/* Hitung Jarak */
 
 function hitungJarak(
 lat1,
@@ -67,14 +77,7 @@ return R * c;
 
 }
 
-/* sementara */
-
-const cart =
-JSON.parse(
-localStorage.getItem("cart")
-) || [];
-
-renderOrder();
+/* Render Pesanan */
 
 function renderOrder(){
 
@@ -82,23 +85,24 @@ subtotal = 0;
 
 orderList.innerHTML = "";
 
-cart.forEach(item=>{
+cart.forEach((item,index)=>{
 
 subtotal +=
-item.harga * item.qty;
+item.harga *
+item.qty;
 
 orderList.innerHTML += `
 
 <p>
 
-${item.nama}
+${index + 1}. ${item.nama}
 
 (${item.qty}x)
 
 - Rp${(
 item.harga *
 item.qty
-).toLocaleString()}
+).toLocaleString('id-ID')}
 
 </p>
 
@@ -110,30 +114,35 @@ updateTotal();
 
 }
 
+renderOrder();
+
+/* Update Total */
+
 function updateTotal(){
 
 subtotalEl.innerText =
 "Rp" +
-subtotal.toLocaleString();
+subtotal.toLocaleString('id-ID');
 
 shippingEl.innerText =
 "Rp" +
-ongkir.toLocaleString();
+ongkir.toLocaleString('id-ID');
 
 totalEl.innerText =
 "Rp" +
 (
 subtotal +
 ongkir
-).toLocaleString();
+).toLocaleString('id-ID');
 
 }
+
+/* Pilihan Pengambilan */
 
 document
 .querySelectorAll(
 'input[name="delivery"]'
 )
-
 .forEach(radio=>{
 
 radio.addEventListener(
@@ -146,18 +155,21 @@ document.getElementById(
 );
 
 if(
-radio.value ===
-'delivery' &&
+radio.value === "delivery" &&
 radio.checked
 ){
 
 card.style.display =
-'block';
+"block";
 
 }else{
 
 card.style.display =
-'none';
+"none";
+
+document
+.getElementById("distance")
+.value = "";
 
 ongkir = 0;
 
@@ -169,26 +181,99 @@ updateTotal();
 
 });
 
+/* Ambil Lokasi */
+
 document
-.getElementById(
-'distance'
-)
-
+.getElementById("lokasiBtn")
 .addEventListener(
-'input',
-e=>{
+"click",
+()=>{
 
-const km =
-parseFloat(
-e.target.value
-) || 0;
+const metode =
+document.querySelector(
+'input[name="delivery"]:checked'
+).value;
+
+if(
+metode === "pickup"
+){
+
+alert(
+"Ambil di toko tidak memerlukan lokasi."
+);
+
+return;
+
+}
+
+if(
+!navigator.geolocation
+){
+
+alert(
+"Browser tidak mendukung GPS"
+);
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+(pos)=>{
+
+latitude =
+pos.coords.latitude;
+
+longitude =
+pos.coords.longitude;
+
+const jarak =
+hitungJarak(
+
+tokoLat,
+tokoLng,
+
+latitude,
+longitude
+
+);
+
+document
+.getElementById("distance")
+.value =
+jarak.toFixed(1);
 
 ongkir =
-km * 2000;
+Math.ceil(jarak) *
+2000;
 
 updateTotal();
 
+document
+.getElementById("lokasiStatus")
+.innerHTML =
+
+`✓ Lokasi berhasil diambil
+<br>
+Jarak :
+${jarak.toFixed(1)} KM`;
+
+},
+
+()=>{
+
+alert(
+"Gagal mengambil lokasi"
+);
+
+}
+
+);
+
 });
+
+/* Kirim WhatsApp */
 
 function sendWhatsapp(){
 
@@ -207,6 +292,11 @@ document
 .getElementById("alamat")
 .value;
 
+const metode =
+document.querySelector(
+'input[name="delivery"]:checked'
+).value;
+
 if(
 !nama ||
 !telepon ||
@@ -221,6 +311,12 @@ return;
 
 }
 
+/* Jika Diantar */
+
+if(
+metode === "delivery"
+){
+
 if(
 !latitude ||
 !longitude
@@ -234,12 +330,32 @@ return;
 
 }
 
+}
+
+/* Jika Ambil di Toko */
+
+if(
+metode === "pickup"
+){
+
+ongkir = 0;
+
+}
+
 const total =
 subtotal + ongkir;
 
 const lokasiMaps =
 
-`https://maps.google.com/?q=${latitude},${longitude}`;
+metode === "delivery"
+
+?
+
+`https://maps.google.com/?q=${latitude},${longitude}`
+
+:
+
+"Ambil di Toko";
 
 const pesan =
 
@@ -269,90 +385,31 @@ ${cart.map(item=>
 
 =================
 
+Metode :
+${metode === "pickup"
+? "Ambil di Toko"
+: "Diantar ke Rumah"}
+
 Subtotal :
-Rp${subtotal.toLocaleString()}
+Rp${subtotal.toLocaleString('id-ID')}
 
 Ongkir :
-Rp${ongkir.toLocaleString()}
+Rp${ongkir.toLocaleString('id-ID')}
 
 Total :
-Rp${total.toLocaleString()}
+Rp${total.toLocaleString('id-ID')}
 
 =================
 
-LOKASI CUSTOMER
+LOKASI
 
 ${lokasiMaps}
-
 `;
 
 window.open(
 
-`https://wa.me/6282225869938?text=${encodeURIComponent(pesan)}`
+`https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`
 
 );
 
 }
-
-
-
-
-document
-.getElementById("lokasiBtn")
-.addEventListener("click",()=>{
-
-if(!navigator.geolocation){
-
-alert("Browser tidak mendukung GPS");
-
-return;
-
-}
-
-navigator.geolocation.getCurrentPosition(
-
-(pos)=>{
-
-latitude = pos.coords.latitude;
-longitude = pos.coords.longitude;
-
-const jarak =
-hitungJarak(
-tokoLat,
-tokoLng,
-latitude,
-longitude
-);
-
-document
-.getElementById("distance")
-.value =
-jarak.toFixed(1);
-
-ongkir =
-Math.ceil(jarak) * 2000;
-
-updateTotal();
-
-document
-.getElementById("lokasiStatus")
-.innerHTML =
-
-`✓ Lokasi berhasil diambil
-<br>
-Jarak:
-${jarak.toFixed(1)} KM`;
-
-},
-
-()=>{
-
-alert(
-"Gagal mengambil lokasi"
-);
-
-}
-
-);
-
-});

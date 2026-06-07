@@ -377,6 +377,17 @@ body{
   transform:translateY(-10px);
 }
 
+
+.produk-card a,
+.produk-card a:hover,
+.produk-card a:visited{
+
+  text-decoration:none;
+
+  color:#222;
+
+}
+
 .produk-card img{
   width:100%;
   height:auto;
