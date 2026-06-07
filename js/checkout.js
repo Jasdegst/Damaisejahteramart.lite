@@ -19,7 +19,7 @@ document.getElementById("shipping");
 const totalEl =
 document.getElementById("total");
 
-/* Keranjang */
+/* Ambil Keranjang */
 
 const cart =
 JSON.parse(
@@ -85,6 +85,15 @@ subtotal = 0;
 
 orderList.innerHTML = "";
 
+if(cart.length === 0){
+
+orderList.innerHTML =
+"<p>Keranjang masih kosong</p>";
+
+return;
+
+}
+
 cart.forEach((item,index)=>{
 
 subtotal +=
@@ -137,7 +146,7 @@ ongkir
 
 }
 
-/* Pilihan Pengambilan */
+/* Pilihan Pengiriman */
 
 document
 .querySelectorAll(
@@ -211,7 +220,7 @@ if(
 ){
 
 alert(
-"Browser tidak mendukung GPS"
+"Browser tidak mendukung GPS."
 );
 
 return;
@@ -256,15 +265,14 @@ document
 
 `✓ Lokasi berhasil diambil
 <br>
-Jarak :
-${jarak.toFixed(1)} KM`;
+Jarak : ${jarak.toFixed(1)} KM`;
 
 },
 
 ()=>{
 
 alert(
-"Gagal mengambil lokasi"
+"Gagal mengambil lokasi."
 );
 
 }
@@ -273,57 +281,132 @@ alert(
 
 });
 
-/* Kirim WhatsApp */
+/* Kirim Pesanan */
+
+let kembalian = 0;
+
+
+document
+.querySelectorAll(
+'input[name="payment"]'
+)
+.forEach(radio=>{
+
+radio.addEventListener(
+'change',
+()=>{
+
+const cashCard =
+document.getElementById(
+'cashCard'
+);
+
+if(
+radio.value === "cash" &&
+radio.checked
+){
+
+cashCard.style.display =
+"block";
+
+}else{
+
+cashCard.style.display =
+"none";
+
+}
+
+});
+
+});
+
+
+document
+.getElementById("cashAmount")
+.addEventListener(
+"input",
+()=>{
+
+const bayar =
+parseInt(
+document.getElementById(
+"cashAmount"
+).value
+) || 0;
+
+const totalBelanja =
+subtotal + ongkir;
+
+kembalian =
+bayar - totalBelanja;
+
+document.getElementById(
+"changeAmount"
+).innerText =
+
+"Rp" +
+
+Math.max(
+0,
+kembalian
+).toLocaleString(
+'id-ID'
+);
+
+});
+
 
 function sendWhatsapp(){
 
 const nama =
-document
-.getElementById("nama")
-.value;
+document.getElementById("nama").value;
 
 const telepon =
-document
-.getElementById("telepon")
-.value;
+document.getElementById("telepon").value;
 
 const alamat =
-document
-.getElementById("alamat")
-.value;
+document.getElementById("alamat").value;
 
 const metode =
 document.querySelector(
 'input[name="delivery"]:checked'
 ).value;
 
-if(
-!nama ||
-!telepon ||
-!alamat
-){
+const pembayaran =
+document.querySelector(
+'input[name="payment"]:checked'
+).value;
+
+/* Validasi */
+
+if(!nama || !telepon || !alamat){
 
 alert(
-"Lengkapi data pemesan terlebih dahulu"
+"Lengkapi data pemesan terlebih dahulu."
 );
 
 return;
 
 }
 
-/* Jika Diantar */
-
-if(
-metode === "delivery"
-){
-
-if(
-!latitude ||
-!longitude
-){
+if(cart.length === 0){
 
 alert(
-"Silakan ambil lokasi terlebih dahulu"
+"Keranjang masih kosong."
+);
+
+return;
+
+}
+
+/* Delivery wajib lokasi */
+
+if(metode === "delivery"){
+
+if(!latitude || !longitude){
+
+alert(
+"Silakan ambil lokasi terlebih dahulu."
 );
 
 return;
@@ -332,18 +415,48 @@ return;
 
 }
 
-/* Jika Ambil di Toko */
+/* Pickup tanpa ongkir */
 
-if(
-metode === "pickup"
-){
+if(metode === "pickup"){
 
 ongkir = 0;
+
+updateTotal();
 
 }
 
 const total =
 subtotal + ongkir;
+
+/* Pembayaran */
+
+let bayar = 0;
+
+if(pembayaran === "cash"){
+
+bayar =
+parseInt(
+document.getElementById(
+"cashAmount"
+).value
+) || 0;
+
+if(bayar < total){
+
+alert(
+"Uang pembayaran kurang dari total belanja."
+);
+
+return;
+
+}
+
+kembalian =
+bayar - total;
+
+}
+
+/* Link Lokasi */
 
 const lokasiMaps =
 
@@ -357,9 +470,28 @@ metode === "delivery"
 
 "Ambil di Toko";
 
+/* Daftar Produk */
+
+const daftarProduk =
+
+cart.map(item =>
+
+`${item.nama}
+(${item.qty}x)
+- Rp${(
+item.harga *
+item.qty
+).toLocaleString('id-ID')}`
+
+).join('\n');
+
+/* Pesan WA */
+
 const pesan =
 
 `*DAMAI SEJAHTERA MART*
+
+=================
 
 DATA PEMESAN
 
@@ -374,21 +506,21 @@ ${alamat}
 
 =================
 
-PESANAN :
+PESANAN
 
-${cart.map(item=>
-
-`${item.nama}
-(${item.qty}x)`
-
-).join('\n')}
+${daftarProduk}
 
 =================
 
-Metode :
+Metode Pengambilan :
 ${metode === "pickup"
 ? "Ambil di Toko"
 : "Diantar ke Rumah"}
+
+Metode Pembayaran :
+${pembayaran === "cash"
+? "Tunai"
+: "Transfer Bank"}
 
 Subtotal :
 Rp${subtotal.toLocaleString('id-ID')}
@@ -399,17 +531,94 @@ Rp${ongkir.toLocaleString('id-ID')}
 Total :
 Rp${total.toLocaleString('id-ID')}
 
+${pembayaran === "cash"
+
+?
+
+`Uang Dibayar :
+Rp${bayar.toLocaleString('id-ID')}
+
+Kembalian :
+Rp${kembalian.toLocaleString('id-ID')}`
+
+:
+
+`Pembayaran :
+Transfer Bank`
+
+}
+
 =================
 
 LOKASI
 
-${lokasiMaps}
-`;
+${lokasiMaps}`;
+
+/* Simpan Histori */
+
+const histori =
+
+JSON.parse(
+localStorage.getItem("orderHistory")
+) || [];
+
+histori.push({
+
+tanggal:
+new Date().toLocaleString('id-ID'),
+
+nama,
+telepon,
+alamat,
+
+metode,
+pembayaran,
+
+produk:[...cart],
+
+subtotal,
+ongkir,
+total,
+
+bayar,
+kembalian
+
+});
+
+localStorage.setItem(
+
+"orderHistory",
+
+JSON.stringify(histori)
+
+);
+
+/* Buka WhatsApp */
 
 window.open(
 
-`https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`
+`https://wa.me/6289691780494?text=${encodeURIComponent(pesan)}`,
+
+"_blank"
 
 );
+
+/* Kosongkan Keranjang */
+
+cart.length = 0;
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+/* Redirect */
+
+setTimeout(()=>{
+
+window.location.href =
+"histori.html";
+
+},1000);
 
 }

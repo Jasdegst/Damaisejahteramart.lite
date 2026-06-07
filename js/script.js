@@ -6,13 +6,47 @@ window.addEventListener('load', () => {
 });
 
 // Menu Mobile
-const toggle = document.getElementById('menu-toggle');
+const toggle =
+document.getElementById("menu-toggle");
 
-const navLinks = document.querySelector('.nav-links');
+const navLinks =
+document.querySelector(".nav-links");
 
-toggle.addEventListener('click', () => {
+toggle.addEventListener("click",(e)=>{
 
-  navLinks.classList.toggle('active');
+  e.stopPropagation();
+
+  navLinks.classList.toggle("active");
+
+});
+
+/* Tutup menu jika klik area lain */
+
+document.addEventListener("click",(e)=>{
+
+  if(
+    !navLinks.contains(e.target)
+    &&
+    !toggle.contains(e.target)
+  ){
+
+    navLinks.classList.remove("active");
+
+  }
+
+});
+
+/* Tutup menu jika klik link */
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link=>{
+
+  link.addEventListener("click",()=>{
+
+    navLinks.classList.remove("active");
+
+  });
 
 });
 

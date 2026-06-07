@@ -116,6 +116,56 @@ Rp0
 
 <div class="card">
 
+  <h3>Metode Pembayaran</h3>
+
+  <label class="payment-option">
+
+    <span>Tunai (Cash)</span>
+
+    <input
+      type="radio"
+      name="payment"
+      value="cash"
+      checked>
+
+  </label>
+
+  <label class="payment-option">
+
+    <span>Transfer Bank</span>
+
+    <input
+      type="radio"
+      name="payment"
+      value="transfer">
+
+  </label>
+
+</div>
+
+<div class="card" id="cashCard">
+
+  <h3>Pembayaran Tunai</h3>
+
+  <input
+    type="number"
+    id="cashAmount"
+    placeholder="Jumlah uang yang diberikan">
+
+  <p>
+
+    Kembalian :
+
+    <span id="changeAmount">
+      Rp0
+    </span>
+
+  </p>
+
+</div>
+
+<div class="card">
+
   <h3>Data Pemesan</h3>
 
   <input
