@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Akun Saya</title>
+
+<link rel="stylesheet" href="../css/member.css">
+
+</head>
+<body>
+
+<div class="member-container">
+
+<div class="member-card">
+
+<h2>Akun Saya</h2>
+
+<h3 id="namaMember"></h3>
+
+<p id="teleponMember"></p>
+
+<button onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const member =
+JSON.parse(
+localStorage.getItem("member")
+);
+
+if(member){
+
+document.getElementById(
+"namaMember"
+).innerText =
+member.nama;
+
+document.getElementById(
+"teleponMember"
+).innerText =
+member.telepon;
+
+}
+
+function logout(){
+
+localStorage.removeItem(
+"isLogin"
+);
+
+window.location.href =
+"member.html";
+
+}
+
+</script>
+
+</body>
+</html>

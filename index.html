@@ -69,11 +69,11 @@ rel="stylesheet"
     </li>
 
     <li>
-      <a href="html/akun.html">
-        <i class="ri-user-3-line"></i>
-        Daftar Member
-      </a>
-    </li>
+  <a href="#" id="memberBtn">
+    <i class="ri-user-3-line"></i>
+    Daftar Member
+  </a>
+</li>
 
   </ul>
 
@@ -347,8 +347,96 @@ rel="stylesheet"
   <!-- Back To Top -->
   <button id="topBtn">↑</button>
 
+  <div class="member-modal" id="memberModal">
+
+  <div class="member-box">
+
+    <h2>Daftar Member</h2>
+
+    <p>
+      Dapatkan promo dan histori belanja.
+    </p>
+
+    <button
+class="login-phone"
+onclick="window.location.href='html/member.html'">
+
+<i class="ri-smartphone-line"></i>
+Daftar dengan Nomor Telepon
+
+</button>
+
+    <button
+class="login-google"
+onclick="alert('Login Google memerlukan Firebase')">
+
+<i class="ri-google-fill"></i>
+Masuk dengan Google
+
+</button>
+
+    <button
+class="login-facebook"
+onclick="alert('Login Facebook memerlukan Facebook Developer')">
+
+<i class="ri-facebook-fill"></i>
+Masuk dengan Facebook
+
+</button>
+
+    <button class="close-modal">
+      Tutup
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+const modal =
+document.getElementById("memberModal");
+
+const daftarBtn =
+document.getElementById("daftarMember");
+
+const closeBtn =
+document.querySelector(".close-modal");
+
+/* Buka Popup */
+
+daftarBtn.addEventListener("click",()=>{
+
+  modal.style.display = "flex";
+
+});
+
+/* Tutup Popup */
+
+closeBtn.addEventListener("click",()=>{
+
+  modal.style.display = "none";
+
+});
+
+/* Klik luar popup */
+
+window.addEventListener("click",(e)=>{
+
+  if(e.target === modal){
+
+    modal.style.display = "none";
+
+  }
+
+});
+
+</script>
+
+
   <!-- JS -->
   <script src="js/script.js"></script>
+
 
 </body>
 </html>

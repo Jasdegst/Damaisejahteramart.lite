@@ -78,3 +78,36 @@ topBtn.addEventListener('click', () => {
   });
 
 });
+
+
+
+const memberBtn =
+document.getElementById("memberBtn");
+
+const memberModal =
+document.getElementById("memberModal");
+
+const closeModal =
+document.querySelector(".close-modal");
+
+memberBtn.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+memberModal.classList.add(
+"active"
+);
+
+});
+
+closeModal.addEventListener(
+"click",
+()=>{
+
+memberModal.classList.remove(
+"active"
+);
+
+});

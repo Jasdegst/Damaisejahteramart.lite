@@ -865,3 +865,102 @@ footer{
 
 
 
+
+/* MEMBER AKUN */
+
+.member-modal{
+
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.5);
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:9999;
+
+}
+
+.member-modal.active{
+
+  display:flex;
+
+}
+
+.member-box{
+
+  width:90%;
+  max-width:400px;
+
+  background:#fff;
+
+  border-radius:20px;
+
+  padding:25px;
+
+  text-align:center;
+
+}
+
+.member-box h2{
+
+  margin-bottom:10px;
+
+}
+
+.member-box p{
+
+  margin-bottom:20px;
+
+  color:#666;
+
+}
+
+.member-box button{
+
+  width:100%;
+
+  height:50px;
+
+  border:none;
+
+  border-radius:12px;
+
+  margin-bottom:12px;
+
+  cursor:pointer;
+
+}
+
+.login-phone{
+
+  background:#7ba428;
+  color:#fff;
+
+}
+
+.login-google{
+
+  background:#ec1717;
+  color:#fff;
+
+}
+
+.login-facebook{
+
+  background:#1877f2;
+  color:#fff;
+
+}
+
+.close-modal{
+
+  background:#f5f5f5;
+
+}
+
+
+
